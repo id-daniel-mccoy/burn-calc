@@ -1,6 +1,6 @@
 {
-  "name": "quick-ic-react",
-  "version": "0.0.0",
+  "name": "ic-burn-calc",
+  "version": "1.2",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
