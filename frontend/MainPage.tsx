@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 export function MainPage() {
 
-  // create a state variable to store the result
-  const [secResult, setSecResult] = useState("");
-  const [minResult, setMinResult] = useState("");
+  const [timeResult, setTimeResult] = useState("");
 
   const calculateSecondsToBurnICP = async () => {
     const conversionRate = Number((document.getElementById("conversionRate") as HTMLInputElement).value);
     const burnRate = Number((document.getElementById("burnRate") as HTMLInputElement).value);
     const secondsToBurnICP = conversionRate / burnRate;
-    setSecResult(secondsToBurnICP.toFixed(2).toString());
     const minutesToBurnICP = Number((secondsToBurnICP / 60).toFixed(2));
     const minutesRemainderDecimal = Number((minutesToBurnICP % 1).toFixed(2));
-    console.log(minutesRemainderDecimal);
-    const decimalToSeconds = Number((minutesRemainderDecimal * 60).toFixed(2));
-    console.log("The IC is burning 1 ICP every " + minutesToBurnICP.toFixed(0) + " minutes and " + decimalToSeconds.toFixed(0) + " seconds.");
-    console.log(decimalToSeconds.toFixed(0));
-    setMinResult(minutesToBurnICP.toFixed(2).toString());
+    const decimalToSeconds = Number((minutesRemainderDecimal * 60).toFixed(0));
+    setTimeResult(minutesToBurnICP.toFixed(0) + " Minutes and " + decimalToSeconds.toFixed(0) + " Seconds.");
   }
 
   return (
@@ -36,12 +30,8 @@ export function MainPage() {
         </div>
         <button onClick={calculateSecondsToBurnICP}>Calculate</button>
         <div className="results">
-          <p>Total Seconds To Burn 1 ICP:</p>
-          <p>{secResult}</p>
-        </div>
-        <div className="results">
-          <p>Total Minutes To Burn 1 ICP:</p>
-          <p>{minResult}</p>
+          <p>Total Time To Burn 1 ICP:</p>
+          <p style={{ color: "lime" }}>{timeResult}</p>
         </div>
       </div>
     </div>
