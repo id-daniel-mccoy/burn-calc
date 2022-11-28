@@ -8,7 +8,7 @@ export function MainPage() {
 
   const calculateSecondsToBurnICP = async () => {
     const conversionRate = await getConversionRate();
-    const burnRate = Number((document.getElementById("burnRate") as HTMLInputElement).value);
+    const burnRate = await getBurnRate();
     if (!burnRate) {
       alert("Please enter a burn rate");
       return;
@@ -18,6 +18,21 @@ export function MainPage() {
     const minutesRemainderDecimal = Number((minutesToBurnICP % 1).toFixed(2));
     const decimalToSeconds = Number((minutesRemainderDecimal * 60).toFixed(0));
     setTimeResult(minutesToBurnICP.toFixed(0) + " Minutes and " + decimalToSeconds.toFixed(0) + " Seconds.");
+    console.log("Updated!");
+  }
+
+  const getBurnRate = async () => {
+    const burnRateAPI:string = "https://ic-api.internetcomputer.org/api/v3/metrics/cycle-burn-rate";
+    function httpGet(theUrl: string) {
+      let xmlHttpReq = new XMLHttpRequest();
+      xmlHttpReq.open("GET", theUrl, false); 
+      xmlHttpReq.send(null);
+      return xmlHttpReq.responseText;
+    }
+    const result = httpGet(burnRateAPI);
+    const jsonResponse = JSON.parse(result);
+    const finalResponse = Number(jsonResponse.cycle_burn_rate[0][1]).toFixed(0);
+    return Number(finalResponse);
   }
 
   const getConversionRate = async () => {
@@ -42,11 +57,6 @@ export function MainPage() {
         <PlugWallet />
       </div>
       <div className="content">
-        <div className="inputContainer">
-          <h6>Current Burn Rate In Cycles/s:</h6>
-          <input type="number" id="burnRate" placeholder="Cycle Burn Rate" />
-          <p style={{fontSize: "12px", width: "60%", margin: "10px"}}>Note: This is the current burn rate of the network. You can find this on the <a href="https://dashboard.internetcomputer.org/" target="_blank">IC Dashboard</a> website.</p>
-        </div>
         <button onClick={calculateSecondsToBurnICP}>Calculate</button>
         <div className="results">
           <p>Total Time To Burn 1 ICP:</p>
