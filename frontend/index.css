@@ -1,7 +1,5 @@
 html {
     background-color: #303030;
-    width: 100%;
-    height: 100%;
 }
 
 .app {
@@ -9,13 +7,6 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-.App, #root {
-    width: 100%;
-    height: 100%;
 }
   
 .header {
@@ -30,72 +21,17 @@ html {
     justify-content: center;
     align-items: center;
     color: #ffcf40;
-    font-size: 18px;
-}
-  
-.content {
-    margin-top: 100px;
-    height: auto;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    font-size: 20px;
-    color: #e7e7e7;
-}
-  
-button {
-    background: none;
-    border: 1px solid #ffcf40;
-    border-radius: 12px;
-    font-size: 14px;
-    padding: 8px 10px;
-    color: lightgoldenrodyellow;
-    cursor: pointer;
-    margin-top: 10px;
-}
-  
-button:hover {
-    background-color: rgba(255,255,255,0.1);
-}
-
-input {
-    width: 30%;
-    text-align: center;
-}
-
-input::placeholder {
-    color: #303030;
-    text-align: center;
+    font-size: 17px;
 }
 
 h6 {
-    font-size: 14px;
+    font-size: 17px;
     color: lightgoldenrodyellow;
     margin-bottom: 20px;
 }
 
 p {
-    font-size: 13px;
+    font-size: 16px;
     text-align: center;
     margin: 5px;
-}
-
-a {
-    color: #ffcf40;
-}
-
-.inputContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.results {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 15px;
 }

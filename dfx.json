@@ -1,6 +1,6 @@
 {
   "canisters": {
-    "assets": {
+    "ic-burn-calc": {
       "frontend": {
         "entrypoint": "dist/index.html"
       },

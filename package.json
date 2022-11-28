@@ -1,6 +1,6 @@
 {
   "name": "ic-burn-calc",
-  "version": "1.4",
+  "version": "1.6",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

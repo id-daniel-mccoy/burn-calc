@@ -1,10 +1,14 @@
 import React, { useState } from "react"
 import * as cyclesIDL from "./interfaces/cmc/cmc";
-import { PlugWallet } from "./components/PlugWallet";
+import { HttpAgent, Actor } from "@dfinity/agent";
 
 export function MainPage() {
 
   const [timeResult, setTimeResult] = useState("");
+
+  const basicAgent = new HttpAgent({
+    host: "https://ic0.app",
+  });
 
   const calculateSecondsToBurnICP = async () => {
     const conversionRate = await getConversionRate();
@@ -17,7 +21,7 @@ export function MainPage() {
     const minutesToBurnICP = Number((secondsToBurnICP / 60).toFixed(2));
     const minutesRemainderDecimal = Number((minutesToBurnICP % 1).toFixed(2));
     const decimalToSeconds = Number((minutesRemainderDecimal * 60).toFixed(0));
-    setTimeResult(minutesToBurnICP.toFixed(0) + " Minutes and " + decimalToSeconds.toFixed(0) + " Seconds.");
+    setTimeResult(Number((minutesToBurnICP - minutesRemainderDecimal)) + " Minutes and " + decimalToSeconds.toFixed(0) + " Seconds.");
     console.log("Updated!");
   }
 
@@ -37,32 +41,32 @@ export function MainPage() {
 
   const getConversionRate = async () => {
     const mainnetCyclesCanister: string = "rkp4c-7iaaa-aaaaa-aaaca-cai";
-    const whitelist: string[] = [mainnetCyclesCanister];
-    await (window as any).ic.plug.createAgent({whitelist});
-    const cyclesMintingActor = await (window as any).ic.plug.createActor({
+    const cyclesMintingActor = Actor.createActor(cyclesIDL.idlFactory, {
+      agent: basicAgent,
       canisterId: mainnetCyclesCanister,
-      interfaceFactory: cyclesIDL.idlFactory,
     });
-    const conversionRate = await cyclesMintingActor.get_icp_xdr_conversion_rate();
+    const conversionRate: any = await cyclesMintingActor.get_icp_xdr_conversion_rate();
     const actualRate = conversionRate.data.xdr_permyriad_per_icp.toString();
     const requiredZeros = "00000000";
     const finalRate = Number(actualRate + requiredZeros);
     return finalRate;
   }
 
+  React.useEffect(() => {
+    calculateSecondsToBurnICP();
+    const interval = setInterval(() => {
+      calculateSecondsToBurnICP();
+    }, 12000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="app">
       <div className="header">
         <h1>Welcome!</h1>
-        <PlugWallet />
       </div>
-      <div className="content">
-        <button onClick={calculateSecondsToBurnICP}>Calculate</button>
-        <div className="results">
-          <p>Total Time To Burn 1 ICP:</p>
-          <p style={{ color: "lime" }}>{timeResult}</p>
-        </div>
-      </div>
+      <h6 style={{marginTop: "100px"}}>Total Time To Burn 1 ICP:</h6>
+      <p style={{ color: "lime" }}>{timeResult}</p>
     </div>
   )
 }

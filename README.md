@@ -1,6 +1,6 @@
-## ICP Burn Rate Calculator v1.4
+## ICP Burn Rate Calculator v1.6
 
-Simple logic written in JS to convert the internet computer's cycle burn rate per second into ICP burn rate per minute.
+Some logic written in JS to convert the internet computer's cycle burn rate per second into ICP burn rate per minute.
 
 ### To Launch:
 
