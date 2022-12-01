@@ -1,3 +1,8 @@
+html, body, #root, .App, .app {
+  height: 100%;
+  margin: 0;
+}
+
 html {
     background-color: #303030;
 }
@@ -24,14 +29,19 @@ html {
     font-size: 17px;
 }
 
+.stats {
+    margin-top: 50%;
+    margin-bottom: 50%;
+}
+
 h6 {
-    font-size: 17px;
+    font-size: 20px;
     color: lightgoldenrodyellow;
     margin-bottom: 20px;
 }
 
 p {
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
     margin: 5px;
 }

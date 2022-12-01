@@ -65,8 +65,10 @@ export function MainPage() {
       <div className="header">
         <h1>Welcome!</h1>
       </div>
-      <h6 style={{marginTop: "100px"}}>Total Time To Burn 1 ICP:</h6>
-      <p style={{ color: "lime" }}>{timeResult}</p>
+      <div className="stats">
+        <h6>Total Time To Burn 1 ICP:</h6>
+        <p style={{ color: "lime" }}>{timeResult}</p>
+      </div>
     </div>
   )
 }
