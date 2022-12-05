@@ -21,7 +21,8 @@ export function MainPage() {
     const minutesToBurnICP = Number((secondsToBurnICP / 60).toFixed(2));
     const minutesRemainderDecimal = Number((minutesToBurnICP % 1).toFixed(2));
     const decimalToSeconds = Number((minutesRemainderDecimal * 60).toFixed(0));
-    setTimeResult(Number((minutesToBurnICP - minutesRemainderDecimal)) + " Minutes and " + decimalToSeconds.toFixed(0) + " Seconds.");
+    const minutesToBurnICPFormatted = minutesToBurnICP.toString().split(".")[0];
+    setTimeResult(Number((minutesToBurnICPFormatted)) + " Minutes and " + decimalToSeconds.toFixed(0) + " Seconds.");
     console.log("Updated!");
   }
 
