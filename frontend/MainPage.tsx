@@ -61,6 +61,8 @@ export function MainPage() {
     return () => clearInterval(interval);
   }, []);
 
+  const notice: string = "(Based On ICP>XDR)";
+
   return (
     <div className="app">
       <div className="header">
@@ -69,6 +71,7 @@ export function MainPage() {
       <div className="stats">
         <h6>Total Time To Burn 1 ICP:</h6>
         <p style={{ color: "lime" }}>{timeResult}</p>
+        <p style={{ color: "lightgoldenrodyellow", fontSize: "16px" }}>{notice}</p>
       </div>
     </div>
   )
