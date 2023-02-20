@@ -1,37 +1,18 @@
-html, body, #root, .App, .app {
+html, body, #root, .App {
   height: 100%;
   margin: 0;
+  background-color: #000;
 }
 
-html {
-    background-color: #303030;
-}
-
-.app {
+.App {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-  
-.header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 70px;
-    width: 100%;
-    background-color: #202020;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    color: #ffcf40;
-    font-size: 17px;
-}
 
 .stats {
-    margin-top: 50%;
-    margin-bottom: 50%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,13 +21,14 @@ html {
 }
 
 h6 {
-    font-size: 25px;
-    color: lightgoldenrodyellow;
+    font-size: 28px;
+    color: #12fff9;
     margin-bottom: 20px;
+    margin-top: 0;
 }
 
 p {
-    font-size: 22px;
+    font-size: 23px;
     text-align: center;
     margin: 5px;
 }

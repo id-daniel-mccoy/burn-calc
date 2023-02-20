@@ -1,4 +1,4 @@
-## ICP Burn Rate Calculator v1.8
+## ICP Burn Rate Calculator v2.0
 
 Some JS logic to calculate the network wide burn rate of ICP in minutes based off of the XDR>ICP conversion rate and the network wide cycles/s burn rate. Refreshes every 12 seconds.
 
@@ -6,7 +6,7 @@ A deployed on-chain version can be found live here:
 
 https://kvyr2-jyaaa-aaaam-qbaca-cai.ic0.app/
 
-### To Launch:
+### To Setup/Launch:
 
 ```
 git clone https://github.com/cp-daniel-mccoy/burn-calc.git

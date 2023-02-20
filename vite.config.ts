@@ -49,6 +49,7 @@ const aliases = Object.entries(dfxJson.canisters).reduce(
 
 // Generate canister ids, required by the generated canister code in .dfx/local/canisters/*
 // This strange way of JSON.stringifying the value is required by vite
+//@ts-ignore
 const canisterDefinitions = Object.entries(canisterIds).reduce(
   (acc, [key, val]) => ({
     ...acc,
@@ -73,6 +74,7 @@ export default defineConfig({
     },
   },
   server: {
+    port: 3000,
     fs: {
       allow: ["."],
     },
