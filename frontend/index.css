@@ -1,3 +1,10 @@
+/* Title Text */
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+/* Button Text */
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+/* Body Text */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 html, body, #root, .App {
   height: 100%;
   margin: 0;
@@ -21,14 +28,37 @@ html, body, #root, .App {
 }
 
 h6 {
-    font-size: 28px;
+    font-size: 26px;
     color: #12fff9;
     margin-bottom: 20px;
     margin-top: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
 }
 
 p {
     font-size: 23px;
     text-align: center;
     margin: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.credits {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    width: 100%;
+}
+
+.credits img {
+    width: 150px;
+    margin: 5px;
+}
+
+.credits img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
 }
