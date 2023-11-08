@@ -73,7 +73,6 @@ function App() {
         <p style={{ color: "#f5f5f7", fontSize: "17px" }}>{notice}</p>
         <div className="credits">
           <img src={github} onClick={() => window.location.href = "https://github.com/cp-daniel-mccoy/burn-calc"} />
-          <img src={outpostBuilt} onClick={() => window.location.href = "https://twitter.com/EnterOutpost"} />
         </div>
       </div>
     </div>
