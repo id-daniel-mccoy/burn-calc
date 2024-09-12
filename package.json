@@ -1,10 +1,11 @@
 {
   "name": "ic-burn-calc",
-  "version": "2.2",
+  "version": "2.3.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "setup": "npm install && npm audit fix && dfx start --clean --background && dfx deploy && dfx stop && echo 'Setup complete!'"
   },
   "dependencies": {
     "@dfinity/agent": "0.19.3",

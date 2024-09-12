@@ -29,7 +29,7 @@ html, body, #root, .App {
 
 h6 {
     font-size: 26px;
-    color: #12fff9;
+    color: #0076ce;
     margin-bottom: 20px;
     margin-top: 0;
     font-family: 'Montserrat', sans-serif;
@@ -43,18 +43,28 @@ p {
     font-family: 'Roboto', sans-serif;
 }
 
+a {
+    color: #0076ce;
+    text-decoration: underline;
+}
+
+a:hover {
+    transform: scale(1.05);
+    color: lightblue;
+}
+
 .credits {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 40px;
     width: 100%;
 }
 
 .credits img {
-    width: 150px;
+    width: 180px;
     margin: 5px;
 }
 

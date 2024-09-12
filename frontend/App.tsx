@@ -16,15 +16,18 @@ function App() {
     const conversionRate : number = await getConversionRate();
     const burnRate : number = await getBurnRate();
     if (!burnRate) {
-      alert("Please enter a burn rate");
+      alert("There was an error grabbing the burn rate, please try again later.");
       return;
     }
+    // add commas to the burn rate for readability and then update the DOM
+    document.getElementById('burnRate')!.innerHTML = burnRate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " Cycles/Sec";
     const secondsToBurnICP = conversionRate / burnRate;
     const minutesToBurnICP = Number((secondsToBurnICP / 60).toFixed(2));
-    const minutesRemainderDecimal = Number((minutesToBurnICP % 1).toFixed(2));
-    const decimalToSeconds = Number((minutesRemainderDecimal * 60).toFixed(0));
+    const secondsRemainderDecimal = Number((secondsToBurnICP % 1).toFixed(3));
+    const decimalToMilliseconds = Number((secondsRemainderDecimal * 1000).toFixed(0));
     const minutesToBurnICPFormatted = minutesToBurnICP.toString().split(".")[0];
-    setTimeResult(Number((minutesToBurnICPFormatted)) + " Minutes and " + decimalToSeconds.toFixed(0) + " Seconds");
+    const secondsToBurnICPFormatted = secondsToBurnICP.toString().split(".")[0];
+    setTimeResult(`${minutesToBurnICPFormatted} Minutes, ${secondsToBurnICPFormatted} Seconds, and ${decimalToMilliseconds} Milliseconds`);
     console.log("Updated!");
   }
 
@@ -71,9 +74,12 @@ function App() {
         <h6>TOTAL TIME TO BURN 1 ICP</h6>
         <p style={{ color: "#fc609d" }}>{timeResult}</p>
         <p style={{ color: "#f5f5f7", fontSize: "17px" }}>{notice}</p>
+        <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "40px" }}>Current Burn Rate:</p>
+        <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "0px" }} id='burnRate'/>
         <div className="credits">
           <img src={github} onClick={() => window.location.href = "https://github.com/cp-daniel-mccoy/burn-calc"} />
         </div>
+        <a href='https://danielmccoy.us/' target="_blank" rel="noopener noreferrer">www.danielmccoy.us</a>
       </div>
     </div>
   )
