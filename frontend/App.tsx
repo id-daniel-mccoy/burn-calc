@@ -21,6 +21,7 @@ function App() {
     }
     // add commas to the burn rate for readability and then update the DOM
     document.getElementById('burnRate')!.innerHTML = burnRate.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " Cycles/Sec";
+    await getTotalICPBurned();
     const secondsToBurnICP = conversionRate / burnRate;
     const minutesToBurnICP = Number((secondsToBurnICP / 60).toFixed(2));
     const secondsRemainderDecimal = Number((secondsToBurnICP % 1).toFixed(3));
@@ -58,6 +59,24 @@ function App() {
     return finalRate;
   }
 
+  const getTotalICPBurned = async () => {
+    const totalIcpBurnedAPI:string = "https://ledger-api.internetcomputer.org/icp-burned/latest";
+    function httpGet(theUrl: string) {
+      let xmlHttpReq = new XMLHttpRequest();
+      xmlHttpReq.open("GET", theUrl, false); 
+      xmlHttpReq.send(null);
+      return xmlHttpReq.responseText;
+    }
+    const result = httpGet(totalIcpBurnedAPI);
+    console.log(result);
+    const jsonResponse = JSON.parse(result);
+    console.log(jsonResponse[1]);
+    const totalIcpBurned = jsonResponse[1] / Math.pow(10, 8);
+    const totalIcpBurnedRounded = totalIcpBurned.toFixed(2);
+    const totalIcpBurnedFormatted = totalIcpBurnedRounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    document.getElementById('totalBurned')!.innerHTML = totalIcpBurnedFormatted + " ICP";
+  }
+
   React.useEffect(() => {
     calculateSecondsToBurnICP();
     const interval = setInterval(() => {
@@ -76,6 +95,8 @@ function App() {
         <p style={{ color: "#f5f5f7", fontSize: "17px" }}>{notice}</p>
         <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "40px" }}>Current Burn Rate:</p>
         <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "0px" }} id='burnRate'/>
+        <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "40px" }}>Total ICP Burned:</p>
+        <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "0px" }} id='totalBurned'/>
         <div className="credits">
           <img src={github} onClick={() => window.location.href = "https://github.com/cp-daniel-mccoy/burn-calc"} />
         </div>
