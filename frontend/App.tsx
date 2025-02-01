@@ -7,10 +7,24 @@ import github from "./assets/github.png";
 function App() {
 
   const [timeResult, setTimeResult] = useState("");
+  const [lastUpdated, setLastUpdated] = useState("");
 
   const basicAgent : HttpAgent = new HttpAgent({
     host: "https://ic0.app",
   });
+
+  const getTime = () => {
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const hours12 = hours % 12 || 12;
+    const minutesFormatted = minutes < 10 ? `0${minutes}` : minutes;
+    const secondsFormatted = seconds < 10 ? `0${seconds}` : seconds;
+    const time = `${hours12}:${minutesFormatted}:${secondsFormatted} ${ampm}`;
+    setLastUpdated(time);
+  }
 
   const calculateSecondsToBurnICP = async () : Promise<void> => {
     const conversionRate : number = await getConversionRate();
@@ -30,6 +44,7 @@ function App() {
     const secondsToBurnICPFormatted = secondsToBurnICP.toString().split(".")[0];
     setTimeResult(`${minutesToBurnICPFormatted} Minutes, ${secondsToBurnICPFormatted} Seconds, and ${decimalToMilliseconds} Milliseconds`);
     console.log("Updated!");
+    getTime();
   }
 
   const getBurnRate = async () : Promise<number> => {
@@ -95,8 +110,9 @@ function App() {
         <p style={{ color: "#f5f5f7", fontSize: "17px" }}>{notice}</p>
         <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "40px" }}>Current Burn Rate:</p>
         <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "0px" }} id='burnRate'/>
-        <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "40px" }}>Total ICP Burned:</p>
+        <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "40px" }}>Total ICP Burned (All-Time):</p>
         <p style={{ color: "#f5f5f7", fontSize: "17px", marginTop: "0px" }} id='totalBurned'/>
+        <p style={{ color: "#f5f5f7", fontSize: "15px", marginTop: "30px" }}>Last Updated: {lastUpdated}</p>
         <div className="credits">
           <img src={github} onClick={() => window.location.href = "https://github.com/cp-daniel-mccoy/burn-calc"} />
         </div>
